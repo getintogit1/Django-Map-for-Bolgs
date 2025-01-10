@@ -1,0 +1,62 @@
+<style type="text/css">
+    .card {
+        max-width: 700px;
+        width: 100%;
+    }
+    .card-body {
+        padding: 20px;
+    }
+</style>
+
+{% if attractions %}
+<div class="container">
+    <div class="row">
+        <!-- attraction Loop -->
+        {% for attraction in attractions %}
+        <div class="col-md-6"> <!-- Adjust column width as per your layout -->
+            <div class="card mb-4">
+                <a href="{% url 'attraction_detail' attraction.id %}">
+                    <img class="card-img-top" src="{{ attraction.image.url }}">
+                </a>
+
+                <div class="card-body">
+                    <a href="{% url 'attraction_detail' attraction.id %}">
+                        <h2 class="card-title">{{ attraction.title }}</h2>
+                    </a>
+                    <p class="card-text">{{ attraction.description|truncatechars:180 }}</p>
+                </div>
+                <div class="card-footer text-muted">
+                    Technology: {{ attraction.technology }}
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+        <!-- End attraction Loop -->
+    </div>
+    <!-- Pagination -->
+    <div class="row">
+        <div class="col-md-12">
+            <div class="d-flex justify-content-center">
+                {{ attractions.paginator.num_pages }} pages:
+                {% for num in attractions.paginator.page_range %}
+                <a href="?page={{ num }}{% if query %}&q={{ query }}{% endif %}" class="btn btn-outline-primary mx-1">{{ num }}</a>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    <!-- End Pagination -->
+</div>
+{% else %} 
+<div class="container">
+    <div class="row">
+        <div class="card m-auto">
+            <div class="card-body mt-2 mb-2">
+                <h2 class="card-title">
+                    No Results
+                </h2>
+                <p class="card-text">There are no results matching your search: "{{ query }}"</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}

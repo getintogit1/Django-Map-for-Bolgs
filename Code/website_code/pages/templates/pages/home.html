@@ -1,0 +1,364 @@
+{% extends "base.html" %}
+{% block content %}
+{% load static %}
+
+<style>
+    .btn-lg {
+        padding: 15px 30px; /* Increase padding for larger buttons */
+        font-size: 1.5rem;   /* Increase font size for better readability */
+        border-radius: 8px;  /* Optional: Slightly increase border radius for a more rounded look */
+    }
+    
+    /* Ensure the button text is centered */
+    .btn {
+        text-align: center;
+        display: inline-block;
+    }
+    
+    /* Additional styles to make the buttons stand out */
+    .btn-primary {
+        background-color: #007bff;
+        color: white;
+    }
+
+    .btn-secondary {
+        background-color: #6c757d;
+        color: white;
+    }
+
+    .btn:hover {
+        opacity: 0.9;
+    }
+
+    /* Center the buttons */
+    .d-flex .btn {
+        margin: 0 5px; /* Add some space between the buttons */
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+        .btn-lg {
+            font-size: 1.2rem;
+            padding: 10px 20px;
+        }
+    }
+
+
+</style>
+<h1><a style="color: inherit; /* Inherit the color from the parent element */
+    text-decoration: none; /* Remove underline */" href="{% url 'home' %}">Attractions</a></h1>
+
+
+    {% if request.user.is_authenticated %} 
+    <section class="d-flex justify-content-between">
+        <div class="py-5 text-center container-fluid" id="slideshow"></div>
+        <div class="py-5 text-center container-fluid" id="content">
+            <div class="col-lg-6 col-md-8 mx-auto">
+                <h1 style="font-size: 40px;" class="fw-strong"><strong>Entdecken Sie neue Blogs!</strong></h1>
+                <p style="font-size: 20px;" class="lead text-body-secondary">Lesen oder schreiben Sie neue Blogs!</p>
+                <p class="d-flex justify-content-center">
+                    <a href="{% url 'blog_page' %}" class="btn btn-primary btn-lg mx-2">Blogs lesen</a>
+                    <a href="{% url 'blog:create' %}" class="btn btn-secondary btn-lg mx-2">Blogs schreiben</a>
+                </p>
+            </div>
+        </div>
+    </section>
+    {% endif %}
+    
+    {% if attractions %}
+    {% if not request.user.is_authenticated %}
+    <section class="d-flex justify-content-between">
+        <div class="py-5 text-center container-fluid" id="slideshow"></div>
+        <div class="py-5 text-center container-fluid" id="content">
+            <div class="col-lg-6 col-md-8 mx-auto">
+                <h1 style="font-size: 40px; " class="fw-strong"><strong>Sights of Salzburg</strong></h1>
+                <p style="font-size: 20px;" class="lead text-body-secondary">Tauchen Sie ein in besondere Erfahrungen aus Salzburg und entdecken Sie neue Orte, indem Sie sich anmelden, um unsere Blogs zu lesen oder zu schreiben. Werden Sie Teil unserer Community und teilen Sie Ihre Erlebnisse mit anderen Leserinnen und Lesern!</p>
+                <p class="d-flex justify-content-center">
+                    <a href="{% url 'login' %}" class="btn btn-primary btn-lg mx-2">Login</a>
+                    <a href="{% url 'register' %}" class="btn btn-secondary btn-lg mx-2">Register</a>
+                </p>
+            </div>
+        </div>
+    </section>
+    {% endif %}
+
+
+    {% comment %} changing images in the background  {% endcomment %} 
+    <!-- Ensure this block is properly closed with endblock -->
+    {% block scripts %}
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var images = [
+                '{% static "FRANZISKANERKIRCHE.jpg" %}',   
+                '{% static "SALZBURGERDOM.jpg" %}',
+                '{% static "Mozart-Geburtshaus.jpg" %}',
+                '{% static "Schloss_Mirabell_und_Mirabellgarten.jpg" %}',
+                '{% static "Tierpark_hellbrunn.jpg" %}'
+            ];
+            var currentIndex = 0;
+
+            function changeBackground() {
+                currentIndex = (currentIndex + 1) % images.length;
+                var slideshowElement = document.getElementById('slideshow');
+                slideshowElement.style.backgroundImage = 'url(' + images[currentIndex] + ')';
+            }
+
+            setInterval(changeBackground, 5000); // Change background every 5 seconds
+            changeBackground(); // Initial call to set the first background image
+        });
+    </script>
+    {% endblock %}
+
+
+    <div class="col-md-12" style="margin-top: 50px;">
+        <div id="map"></div>
+        <script>
+            const attractions = {{ Attractions | safe }}; // Assuming attractions is a list of Django model objects
+
+            var CartoDB_Voyager = L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+                subdomains: 'abcd',
+                maxZoom: 20
+            });
+
+            const osm_options = {
+                maxZoom: 19,
+                noWrap: true,
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            };
+    
+            const osmMap = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', osm_options);
+    
+            // Define the bounds for Salzburg
+            const bounds = L.latLngBounds(
+                L.latLng(47.737, 13.003), // Southwest corner of the bounding box
+                L.latLng(47.818, 13.070)  // Northeast corner of the bounding box
+            );
+    
+            const mapElement = 'map'; // Change var to const for better scoping
+            // My Map 
+            const mymap = L.map(mapElement, {
+                center: [47.811195, 13.033229],
+                zoom:10,
+                minZoom: 10,
+                zoomSnap: 0.25,
+                zoomDelta: 0.25,
+                easelinearity: 0.2,
+                worldcopyjump: true,
+                layers: [osmMap],
+                maxBounds: bounds, // Set the maximum bounds
+                attributionControl: false
+            });
+    
+            // Add a marker for the user's current position
+            function onLocationFound(e) {
+                const radius = e.accuracy / 2;
+    
+                L.marker(e.latlng).addTo(mymap)
+                    .bindPopup("You are here").openPopup();
+    
+                L.circle(e.latlng, radius).addTo(mymap);
+            }
+    
+            // Handle errors if geolocation is not supported or user denies permission
+            function onLocationError(e) {
+                alert(e.message);
+            }
+    
+            // Request user's location
+            mymap.on('locationfound', onLocationFound);
+            mymap.on('locationerror', onLocationError);
+    
+            mymap.locate({ setView: true, maxZoom: 13 }); // Request the user's location and set the map's view
+            // Loop through all attractions
+
+            const attractions_local=[
+            {
+              "address": "Hellbrunnerstrasse 60, 5081 Anif",
+              "title": "tierpark-hellbrunn",
+              "lat": 47.7560944,
+              "lng": 13.065878311762269
+            },
+            {
+              "address": "Braeuhausstrasse 9, 5020 Salzburg",
+              "title": "stiegl-brauwelt",
+              "lat": 47.793735,
+              "lng": 13.0210449
+            },
+            {
+              "address": "St.-Peter-Bezirk 1, 5020 Salzburg",
+              "title": "st-peter-friedhof",
+              "lat": 47.7969982,
+              "lng": 13.0456881
+            },
+            {
+              "address": "Leopoldskronstrasse 56, 5020 Salzburg",
+              "title": "schloss-leopoldskron",
+              "lat": 47.7891026,
+              "lng": 13.0377667
+            },
+            {
+              "address": "Fuerstenweg 37, 5020 Salzburg",
+              "title": "schloss-hellbrunn",
+              "lat": 47.7624748,
+              "lng": 13.060619
+            },
+            {
+              "address": "Hellbrunner Allee 53, 5020 Salzburg",
+              "title": "schloss-frohnburg",
+              "lat": 47.7773172,
+              "lng": 13.061097614973978
+            },
+            {
+              "address": "Residenzpl. 1, 5020 Salzburg",
+              "title": "salzburger-residenz",
+              "lat": 47.7982465,
+              "lng": 13.0455752
+            },
+            {
+              "address": "Kapitelplatz 2, 5020 Salzburg",
+              "title": "salzburger-dom",
+              "lat": 47.7969193,
+              "lng": 13.0471719
+            },
+            {
+              "address": "Ferdinand-Hanusch-Platz, 5020 Salzburg",
+              "title": "salzach-river-cruise",
+              "lat": 47.8009555,
+              "lng": 13.0422165
+            },
+            {
+              "address": "Moenchsberg 32, 5020 Salzburg",
+              "title": "museum-der-moderne",
+              "lat": 47.80086035,
+              "lng": 13.038299335199692
+            },
+            {
+              "address": "Mozartplatz, 5020 Salzburg",
+              "title": "mozartplatz",
+              "lat": 47.798958299999995,
+              "lng": 13.047939855211343
+            },
+            {
+              "address": "Getreidegasse 9, 5020 Salzburg",
+              "title": "mozart-geburtshaus",
+              "lat": 47.79994295,
+              "lng": 13.043553648344659
+            },
+            {
+              "address": "Mirabellplatz 3, 5020 Salzburg",
+              "title": "mirabellgarten",
+              "lat": 47.8045283,
+              "lng": 13.0432249
+            },
+            {
+              "address": "Kapuzinerberg 6, 5020 Salzburg",
+              "title": "kapuzinerberg",
+              "lat": 47.80194535,
+              "lng": 13.046968177111555
+            },
+            {
+              "address": "Museumsplatz 5, 5020 Salzburg",
+              "title": "haus-der-natur",
+              "lat": 47.8018019,
+              "lng": 13.039186251452449
+            },
+            {
+              "address": "Getreidegasse, 5020 Salzburg",
+              "title": "getreidegasse",
+              "lat": 47.8000193,
+              "lng": 13.0422707
+            },
+            {
+              "address": "Sigmund-Haffner-Gasse 13, 5020 Salzburg",
+              "title": "franziskanerkirche",
+              "lat": 47.7984351,
+              "lng": 13.043827
+            },
+            {
+              "address": "Moenchsberg 34, 5020 Salzburg",
+              "title": "festung-hohensalzburg",
+              "lat": 47.79518255,
+              "lng": 13.047891061017928
+            },
+            {
+              "address": "Domplatz 1a, 5020 Salzburg",
+              "title": "dom-quartier",
+              "lat": 47.797911600000006,
+              "lng": 13.045446362782432
+            }
+          ]
+ // Loop through all local attractions and add markers
+        attractions_local.forEach(function(attraction_local) {
+            const lat = attraction_local.lat;
+            const lng = attraction_local.lng;
+            const title = attraction_local.title;
+
+            // Add a marker to the map
+            const marker = L.marker([lat, lng]).addTo(mymap)
+                           .bindTooltip(title) // Bind the title as a tooltip
+                           .bindTooltip(title) // Bind the title as a tooltip
+                           
+
+            // Construct the URL dynamically based on the title
+            const attractionSlug = title.toLowerCase().replace(/\s+/g, '-');
+            const attractionDetailURL = '/attractions/' + attractionSlug + '/';
+    
+                            // Add event listener for click event
+                            marker.on('click', function() {
+                                // Redirect to the attraction detail page URL
+                                window.location.href = attractionDetailURL;
+                            });
+
+            });
+        </script>
+    </div>
+    
+
+
+  
+  <div class="album py-5 bg-body-tertiary">
+    <div class="container">
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+            {% for attraction in attractions %}
+            <div class="col">
+                <div class="card shadow-sm">
+                    {% if attraction.image %}
+                    {% comment %} <a href="{% url 'attraction_detail' attraction.pk %}">  {% endcomment %}
+                    <a href="{% url 'attraction_detail' slug=attraction.slug %}">
+                        <img class="card-img-top" style="object-fit: cover; width: 100%; height: 400px; "src="{{ attraction.image.url }}">
+                    </a>
+                    {% endif %}
+                    <div class="card-body">
+                        <h5 class="card-title">{{ attraction.title }}</h5>
+                        
+                        <p class="card-text"><strong>Address:</strong> {{ attraction.address }}</p>
+                        <p class="card-text"><strong>Opening Hours:</strong> {{ attraction.opening_hours }}</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="btn-group">
+                                {% comment %} <a href="{% url 'attraction_detail' attraction.pk %}" class="btn btn-primary">Read More</a> {% endcomment %}
+                                <a href="{% url 'attraction_detail' slug=attraction.slug %}" class="btn btn-primary">Mehr Infos</a>
+                            </div>
+                            {% comment %} <small class="text-body-secondary">9 mins</small> {% endcomment %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+            
+            
+            {% else %}
+        <div class="blog-post-container">
+            {% include 'attraction_snippet.html' with query=query %}
+        </div>
+            {% endif %}
+        </div>
+    </div>
+    <!-- Pagination -->
+    {% include 'attraction_pagination.html' with attraction=attractions %}	<!-- End Pagination -->
+
+</div>
+
+
+{% endblock content %}
+

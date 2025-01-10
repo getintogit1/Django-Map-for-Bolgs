@@ -1,0 +1,86 @@
+<!---Splitting Main HTML file in different pieces for better strcture -->
+{% load static %}
+<style type="text/css">
+    .footer{
+        max-height: 100px;
+        padding: 20px 0;
+           
+    }
+
+    .footer-links {
+        margin-bottom: 15px;
+    }
+    
+    .footer-link {
+        color: #007bff; /* Bootstrap primary color for links */
+        text-decoration: none;
+        font-size: 16px;
+    }
+    
+    .footer-link:hover {
+        text-decoration: underline;
+    }
+    
+    .footer-logos {
+        margin-top: 10px;
+    }
+    /* alignign items to the center horizonatly and verticaly */
+    .footer-logo {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    /* settign all images on same size*/
+    .footer-img {
+        width: 100px; /* Set a uniform width */
+        height: 100px; /* Set a uniform height */
+        object-fit: contain; /* Maintain aspect ratio */
+        transition: transform 0.2s ease-in-out;
+    }
+
+    /* typical footer img interaction--> hover effect*/
+    .footer-logo img:hover {
+        transform: scale(1.1);
+    }
+</style>
+<!---Footer-->
+<hr>
+<div class="footer d-flex flex-column align-items-center py-3">
+    <!-- Container for Footer Content -->
+    <div class="footer-content d-flex flex-column align-items-center">
+        
+        <!-- Footer Links -->
+        <div class="footer-links d-flex justify-content-center mb-3">
+            <a href="/impressum" class="footer-link mx-2">Impressum</a>
+            <a href="/datenschutz" class="footer-link mx-2">Datenschutzerklärung</a>
+            <a href="{% url 'kontakt' %}" class="footer-link mx-2">Kontakt</a>
+        </div>
+
+        <!-- Footer Logos -->
+        <div class="footer-logos d-flex flex-wrap justify-content-center align-items-center">
+            <a href="https://www.yourwebsite.com" class="footer-logo mx-2 mb-3">
+                <img class="footer-img" src="{% static 'webproject_logo.png' %}" alt="Webproject Logo">
+            </a>
+            <a href="https://www.plus.ac.at" class="footer-logo mx-2 mb-3">
+                <img class="footer-img" src="{% static 'LOGO-PLUS.png' %}" alt="PLUS Logo">
+            </a>
+            <a href="https://www.salzburg.info" class="footer-logo mx-2 mb-3">
+                <img class="footer-img" src="{% static 'SALZBURGTOURISMUSLOGO.JPEG' %}" alt="Salzburg Tourism Logo">
+            </a>
+            <a href="https://github.com" class="footer-logo mx-2 mb-3">
+                <img class="footer-img" src="{% static 'GitHub-Logo.wine.png' %}" alt="GitHub Logo">
+            </a>
+        </div>
+
+    </div>
+</div>
+<!--- END Footer-->
+
+
+
+<!--- Nececcary Bootsrtap JS-->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+<!--- Unececcary Bootsrtap JS-->
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>

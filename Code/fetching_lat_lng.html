@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Geocode Fetch and Download</title>
+</head>
+<body>
+    <button onclick="fetchAndDownloadData()">Fetch and Download Data</button>
+    
+    <script>
+        const attractions = [
+            { address: "Hellbrunnerstraße 60, 5081 Anif", title: "Hellbrunnerstraße 60" },
+            { address: "Bräuhausstraße 9, 5020 Salzburg", title: "Bräuhausstraße 9" },
+            { address: "St.-Peter-Bezirk 1, 5020 Salzburg", title: "St.-Peter-Bezirk 1" },
+            { address: "Leopoldskronstraße 56, 5020 Salzburg", title: "Leopoldskronstraße 56" },
+            { address: "Fürstenweg 37, 5020 Salzburg", title: "Fürstenweg 37" },
+            { address: "Hellbrunner Allee 53, 5020 Salzburg", title: "Hellbrunner Allee 53" },
+            { address: "Residenzpl. 1, 5020 Salzburg", title: "Residenzpl. 1" },
+            { address: "Kapitelplatz 2, 5020 Salzburg", title: "Kapitelplatz 2" },
+            { address: "Ferdinand-Hanusch-Platz, 5020 Salzburg", title: "Ferdinand-Hanusch-Platz" },
+            { address: "Mönchsberg 32, 5020 Salzburg", title: "Mönchsberg 32" },
+            { address: "Mozartplatz, 5020 Salzburg", title: "Mozartplatz" },
+            { address: "Getreidegasse 9, 5020 Salzburg", title: "Getreidegasse 9" },
+            { address: "Mirabellplatz 3, 5020 Salzburg", title: "Mirabellplatz 3" },
+            { address: "Kapuzinerberg 6, 5020 Salzburg", title: "Kapuzinerberg 6" },
+            { address: "Museumsplatz 5, 5020 Salzburg", title: "Museumsplatz 5" },
+            { address: "Getreidegasse, 5020 Salzburg", title: "Getreidegasse" },
+            { address: "Sigmund-Haffner-Gasse 13, 5020 Salzburg", title: "Sigmund-Haffner-Gasse 13" },
+            { address: "Mönchsberg 34, 5020 Salzburg", title: "Mönchsberg 34" },
+            { address: "Domplatz 1a, 5020 Salzburg", title: "Domplatz 1a" }
+        ];
+
+        async function fetchGeocodeData(address) {
+            const encodedAddress = encodeURIComponent(address);
+            const response = await fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodedAddress}`);
+            const data = await response.json();
+            if (data.length > 0 && data[0].lat && data[0].lon) {
+                return {
+                    address: address,
+                    lat: parseFloat(data[0].lat),
+                    lng: parseFloat(data[0].lon)
+                };
+            } else {
+                console.log(`No geocode results found for: ${address}`);
+                return null;
+            }
+        }
+
+        async function fetchAndDownloadData() {
+            const geocodedAttractions = [];
+
+            for (const attraction of attractions) {
+                const result = await fetchGeocodeData(attraction.address);
+                if (result) {
+                    geocodedAttractions.push(result);
+                }
+            }
+
+            // Convert the geocoded data to JSON format
+            const json = JSON.stringify(geocodedAttractions, null, 2);
+
+            // Create a Blob from the JSON and download it
+            const blob = new Blob([json], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'geocoded_attractions.json';
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+    </script>
+</body>
+</html>

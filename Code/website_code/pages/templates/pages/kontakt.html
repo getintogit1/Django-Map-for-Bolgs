@@ -1,0 +1,111 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<style>
+    /* CSS styles for the content area */
+    .content-container {
+        max-width: 800px;
+        margin: 20px auto;
+        padding: 20px;
+        background-color: #fff;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        /* seperate left and rigth */
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        margin: 80px auto;
+        max-width: 1200px;
+    }
+    .content-container h1 {
+        text-align: center;
+        color: #333;
+    }
+    .content-container form {
+        margin-top: 20px;
+    }
+    .content-container label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+    }
+    .content-container input[type="text"],
+    .content-container input[type="email"],
+    .content-container textarea {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+    .content-container textarea {
+        resize: vertical;
+        min-height: 100px;
+    }
+    .content-container input[type="submit"] {
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        padding: 10px 20px;
+        cursor: pointer;
+    }
+    .content-container input[type="submit"]:hover {
+        background-color: #0056b3;
+    }
+
+    .form-container, .map-container {
+        flex: 1;
+        margin: 10px;
+        padding: 20px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        background-color: #fff;
+        border-radius: 5px;
+    }
+    .form-container {
+        max-width: 45%;
+        min-width: 300px;
+    }
+    .map-container {
+        max-width: 45%;
+        min-width: 300px;
+        text-align: center;
+    }
+    .map-container iframe {
+        width: 100%;
+        height: 300px;
+        border: none;
+        border-radius: 5px;
+    }
+</style>
+
+<div class="content-container">
+    <div class="form-container">
+        <h2>Kontaktieren Sie uns</h2>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" value="Senden">
+        </form>
+    </div>
+    <div class="map-container">
+        <h2>Besuchen Sie uns</h2>
+        <!-- Insert your map iframe or image here -->
+        <iframe 
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2658.853896062474!2d13.034669751004275!3d47.81666727909367!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47769b8ab345345d%3A0x26df7155278d3b03!2sSchillerstra%C3%9Fe%2030%2C%205020%20Salzburg%2C%20Austria!5e0!3m2!1sen!2sus!4v1673274107884!5m2!1sen!2sus" 
+            allowfullscreen="" loading="lazy">
+        </iframe>
+        <div class="contact-info">
+            <p>Schiller Str. 30</p>
+            <p>5020 Salzburg</p>
+            <h3>Kontaktieren Sie uns</h3>
+            <p>Email: <a href="mailto:daten.auskunft@gmail.com">daten.auskunft@gmail.com</a></p>         
+            <p>Email: <a href="mailto:salzburgentdecken@gmail.com">salzburgentdecken@gmail.com</a></p>         
+        </div>
+    </div>
+
+
+</div>
+
+
+{% endblock content %}

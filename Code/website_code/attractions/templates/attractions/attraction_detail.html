@@ -1,0 +1,153 @@
+{% extends "base.html" %}
+
+{% block title %}
+    {{ attraction.title }}
+{% endblock title %}
+
+
+
+{% block content %}
+
+<style>
+    /* For adding contribution to the photography owner */
+    .photographer-overlay {
+      position: absolute;
+      bottom: 10px;
+      right: 10px;
+      background-color: rgba(255, 255, 255, 0.7);
+      padding: 5px 10px;
+      border-radius: 5px;
+      font-size: 12px;
+      color: #333;
+    }
+
+    .img-container {
+        position: relative;
+        max-width: 500px; /* Set maximum width for the image container */
+        max-height: 500px; /* Set maximum height for the image container */
+        overflow: hidden; /* Ensure the content doesn't overflow */
+    }
+
+    .img-container img {
+        width: 100%; /* Ensure the image fits the container */
+        height: auto; /* Maintain aspect ratio */
+    }
+
+
+    
+</style>
+
+<div class="container">
+    <h1>{{ attraction.title }}</h1>
+    <div class="row">
+        <!-- Image Column -->
+        <div class="col-md-6">
+            {% if attraction.image %}
+          
+            <div class="img-container">
+                <a href="{{ attraction.link }}">
+                    <img src="{{ attraction.image.url }}" alt="Image of {{ attraction.title }}">
+                    <div class="photographer-overlay">@{{ attraction.link }}</div>
+                </a>
+            </div>
+            {% endif %}
+        </div>
+
+        <!-- Description Column -->
+        <div class="col-md-6">
+            <div class="row">
+                <div class="col-md-12">
+                    <h5>About the attraction:</h5>
+                    <p>{{ attraction.description }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Second Row -->
+    <div class="row">
+        <!-- Link Column -->
+        <div class="col-md-6">
+            <h5>Link:</h5>
+            {% if attraction.link %}
+                <a href="{{ attraction.link }}" target="_blank">{{ attraction.link }}</a>
+            {% else %}
+                <p>No link provided</p>
+            {% endif %}
+        </div>
+        <!-- Opening Hours Column -->
+        <div class="col-md-6">
+            <h5>Opening Hours:</h5>
+            <p>{{ attraction.opening_hours }}</p>
+        </div>
+    </div>
+    <!-- Third Row -->
+    <div class="row">
+        <!-- Address Column -->
+        <div class="col-md-6">
+            <h5>Address:</h5>
+            <p>{{ attraction.address }}</p>
+        </div>
+        <!-- Price Column -->
+        <div class="col-md-6">
+            <h5>Price:</h5>
+            <p>{{ attraction.price }}</p>
+        </div>
+    </div>
+    <!-- Map Row -->
+    <div class="row">
+        <div class="col-md-12">
+            <div id="map"></div>
+            <script>
+      
+            var address = "{{ attraction.address }}";
+            const osm_options = {
+                maxZoom: 19,
+                noWrap: true,
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            };
+        
+            const osmMap = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', osm_options);
+        
+            // Define the bounds for Salzburg
+            const bounds = L.latLngBounds(
+                L.latLng(47.60949000, 13.35501000),   // Southwest corner of the bounding box
+                L.latLng(48.2, 12.501000) // Northeast corner of the bounding box
+            );
+        
+            const mapElement = 'map'; // Change var to const for better scoping
+            // My Map 
+            const mymap = L.map(mapElement, {
+                center: [47.811195, 13.033229],
+                zoom: 11,
+                minZoom: 10,
+                zoomSnap: 0.25,
+                zoomDelta: 0.25,
+                easelinearity: 0.2,
+                worldcopyjump: true,
+                layers: [osmMap],
+                maxBounds: bounds // Set the maximum bounds
+            });
+        
+            // Use a geocoding service to get the coordinates of the address
+            fetch('https://nominatim.openstreetmap.org/search?format=json&q=' + encodeURIComponent(address))
+                .then(function(response) {
+                    return response.json();
+                })
+                .then(function(data) {
+                    var lat = data[0].lat;
+                    var lon = data[0].lon;
+                    L.marker([lat, lon]).addTo(mymap) // Change map to mymap
+                        .bindPopup(address)
+                        .openPopup();
+                    mymap.setView([lat, lon], 13); // Change map to mymap
+                })
+                .catch(function(error) {
+                    console.log('Error fetching address coordinates:', error);
+                });
+        </script>
+        </div>
+    </div>
+</div>
+
+
+{% endblock content %}

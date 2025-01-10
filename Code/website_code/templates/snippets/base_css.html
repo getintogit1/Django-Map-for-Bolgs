@@ -1,0 +1,69 @@
+<style type="text/css">
+    body{
+        background-color: #f2f2f2;
+    }
+
+    .main{min-height:    100vh; 
+        height:        100% ;
+   }
+   #map {
+       width: 1240px;
+       height: 600px;
+   }
+
+   
+   #slideshow {
+    position: relative;
+    width: 80%;
+    height: 450px; /* Set a specific height; adjust as needed */
+    background-size: cover; /* Ensure the background image covers the container */
+    background-position: center; /* Center the background image */
+    background-repeat: no-repeat; /* Prevent background repetition */
+    border-radius: 15px; /* Rounded corners */
+    overflow: hidden; /* Hide overflow to maintain rounded corners */
+    transition: background-image 1s ease-in-out; /* Smooth transition for background image change */
+}
+
+@media (max-width: 768px) {
+    #slideshow {
+        height: 200px; /* Adjust the height for smaller screens */
+    }
+
+    .btn-lg {
+        font-size: 1rem; /* Adjust button font size for smaller screens */
+        padding: 10px 20px; /* Adjust padding for smaller buttons */
+    }
+
+    .d-flex .btn {
+        margin: 0 5px; /* Ensure spacing between buttons is consistent */
+    }
+
+    #map {
+        width: 100% !important;
+        height: 300px;
+    }
+}
+
+.container-fluid {
+    padding: 0 15px;
+}
+
+.d-flex {
+    flex-wrap: wrap; /* Allow content to wrap on smaller screens */
+}
+
+.fw-strong {
+    font-weight: bold;
+}
+
+.lead {
+    font-size: 1.2rem;
+}
+
+
+   img:hover {
+       opacity: 0.5;
+     }
+
+
+</style>

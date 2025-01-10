@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>{% block title %}This is the New Title{% endblock title %}</title>
+   
+     <!-- Add Leaflet CSS -->
+     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" /> <!--leaflet style-->
+     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""> </script> <!---linking leaflet js-->
+        
+        
+    {% include 'snippets/header.html' %}
+    {% include 'snippets/base_css.html' %}
+
+</head>
+<body>
+
+    <!--- Body-->
+    <!--- No matter how big our website is, our foote will always be on the bottom -->
+        <!--- This Div should occupy the entire screen, for styling reasons(everybody does it...)-->
+    <div class="main">
+        {% block content %}
+        {% endblock content %}
+
+    </div>
+    
+
+    {% include 'snippets/footer.html' %}
+    <!--- End Body-->
+</body>
+
+</html>
