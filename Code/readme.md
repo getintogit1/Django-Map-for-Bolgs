@@ -66,5 +66,4 @@ git clone "https://git.sbg.ac.at/s1086122/webproject_ss_24.git"
 - JavaScript: [JS](https://www.javascript.com/)
 
 
-## Contact
-For any inquiries or suggestions, feel free to contact [Lukas Günter](mailto:lukas.guenter@stud.plus.ac.at).
+
