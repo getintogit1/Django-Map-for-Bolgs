@@ -6,23 +6,17 @@
 A web application for exploring and sharing sights & attractions on an interactive map — powered by Django, Leaflet, and modern web technologies.
 ## 🛠️ Tech Stack
 <p align="center">
-  <!-- HTML Logo -->
   <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" width="50" height="50" alt="HTML5"/>
 
-  <!-- CSS Logo -->
   <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" width="50" height="50" alt="CSS3"/>
 
-  <!-- JavaScript Logo -->
   <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" width="50" height="50" alt="JavaScript"/>
 
-  <!-- Python Logo -->
   <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" width="50" height="50" alt="Python"/>
 
-  <!-- Django Logo -->
   <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/django/django-plain.svg" width="50" height="50" alt="Django"/>
 
-  <!-- Leaflet Logo (no official devicon, using Leaflet logo image) -->
-  <img src="https://leafletjs.com/docs/images/logo.png" width="50" height="50" alt="Leaflet"/>
+  <img src="https://postgis.net/images/postgis-logo.png" width="50" height="50" alt="PostGIS"/>
 </p>
 
 ## 🚀 Features
