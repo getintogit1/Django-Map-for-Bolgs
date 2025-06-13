@@ -1,7 +1,7 @@
 
 
 
-# DjangoBlogMap 🌍🗺️
+# Django Map for Bolgs/Attractions🌍🗺️
 
 A web application for exploring and sharing sights & attractions on an interactive map — powered by Django, Leaflet, and modern web technologies.
 
@@ -9,7 +9,6 @@ A web application for exploring and sharing sights & attractions on an interacti
 
 - User authentication (Login, Register, Password Reset)
 - Interactive map with markers (Leaflet + GeoJSON)
-- Blog system (users can read and write blog posts about attractions)
 - Pagination for lists of attractions
 - Search functionality
 - Responsive UI
@@ -22,12 +21,14 @@ A web application for exploring and sharing sights & attractions on an interacti
   - Description
 
 ## 🛠️ Tech Stack
-
-- **Backend:** Django (Python)
-- **Frontend:** HTML, CSS, JavaScript
-- **Maps:** Leaflet.js, GeoJSON
-- **Auth:** Django built-in authentication system
-- **Database:** (e.g., SQLite/PostgreSQL — depending on your setup)
+<p align="left">
+  <img src="https://img.shields.io/badge/HTML5-E34F26?logo=html5&logoColor=white" alt="HTML5" style="margin-right: 10px;" />
+  <img src="https://img.shields.io/badge/CSS3-1572B6?logo=css3&logoColor=white" alt="CSS3" style="margin-right: 10px;" />
+  <img src="https://img.shields.io/badge/JavaScript-F7DF1E?logo=javascript&logoColor=black" alt="JavaScript" style="margin-right: 10px;" />
+  <img src="https://img.shields.io/badge/Python-3776AB?logo=python&logoColor=white" alt="Python" style="margin-right: 10px;" />
+  <img src="https://img.shields.io/badge/Django-092E20?logo=django&logoColor=white" alt="Django" style="margin-right: 10px;" />
+  <img src="https://img.shields.io/badge/Leaflet-199900?logo=leaflet&logoColor=white" alt="Leaflet" style="margin-right: 10px;" />
+</p>
 
 ## 💻 Screenshots
 
