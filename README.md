@@ -4,6 +4,26 @@
 # Django Map for Bolgs/Attractions🌍🗺️
 
 A web application for exploring and sharing sights & attractions on an interactive map — powered by Django, Leaflet, and modern web technologies.
+## 🛠️ Tech Stack
+<p align="center">
+  <!-- HTML Logo -->
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" width="50" height="50" alt="HTML5"/>
+
+  <!-- CSS Logo -->
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" width="50" height="50" alt="CSS3"/>
+
+  <!-- JavaScript Logo -->
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" width="50" height="50" alt="JavaScript"/>
+
+  <!-- Python Logo -->
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" width="50" height="50" alt="Python"/>
+
+  <!-- Django Logo -->
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/django/django-plain.svg" width="50" height="50" alt="Django"/>
+
+  <!-- Leaflet Logo (no official devicon, using Leaflet logo image) -->
+  <img src="https://leafletjs.com/docs/images/logo.png" width="50" height="50" alt="Leaflet"/>
+</p>
 
 ## 🚀 Features
 
@@ -19,16 +39,6 @@ A web application for exploring and sharing sights & attractions on an interacti
   - Opening hours
   - Price
   - Description
-
-## 🛠️ Tech Stack
-<p align="left">
-  <img src="https://img.shields.io/badge/HTML5-E34F26?logo=html5&logoColor=white" alt="HTML5" style="margin-right: 10px;" />
-  <img src="https://img.shields.io/badge/CSS3-1572B6?logo=css3&logoColor=white" alt="CSS3" style="margin-right: 10px;" />
-  <img src="https://img.shields.io/badge/JavaScript-F7DF1E?logo=javascript&logoColor=black" alt="JavaScript" style="margin-right: 10px;" />
-  <img src="https://img.shields.io/badge/Python-3776AB?logo=python&logoColor=white" alt="Python" style="margin-right: 10px;" />
-  <img src="https://img.shields.io/badge/Django-092E20?logo=django&logoColor=white" alt="Django" style="margin-right: 10px;" />
-  <img src="https://img.shields.io/badge/Leaflet-199900?logo=leaflet&logoColor=white" alt="Leaflet" style="margin-right: 10px;" />
-</p>
 
 ## 💻 Screenshots
 
