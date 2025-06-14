@@ -77,7 +77,7 @@ Pull requests are welcome!
 
 ## 📄 License
 
-[MIT](LICENSE)
+[GNU](LICENSE)
 
 ---
 
