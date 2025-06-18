@@ -35,16 +35,32 @@ A web application for exploring and sharing sights & attractions on an interacti
 ## 💻 Screenshots
 
 ### Landing Page
-![Landing Page](<path/to/screenshot>)
+![Landing Page](Images/home_page_landing.png)
 
 ### Login
-![Login Page](<path/to/screenshot>)
+![Login Page](Images/register_view.png)
 
 ### Attractions List & Map
-![Map + List](<path/to/screenshot>)
+![Map + List](Images/HomePage_Map.png)
 
 ### Attraction Detail
-![Attraction Detail](<path/to/screenshot>)
+![Attraction Detail](Images/attraction_detail.png)
+
+### Blog Overview
+![Blog Page](Images/blog_page.png)
+
+### Blog Post from Other User
+![Blog Other User](Images/blog_from_other_person.png)
+
+### Create Blog Post
+![Create Blog](Images/create_blog_post.png)
+
+### Edit Blog Post
+![Edit Blog](Images/edit_blog_post.png)
+
+### Pagination
+![Pagination](Images/pagination.png)
+
 
 ## 📦 Installation
 
