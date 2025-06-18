@@ -48,9 +48,9 @@ urlpatterns = [
     path('account/', account_view, name = 'account'),
     path('must_authenticate/', must_authenticate_view, name = 'must_authenticate'),
     path('', home_screen_view, name = 'home'),
-    path('kontakt', kontakt_page_view, name = 'kontakt'),
-    path('impressum', impressum_page_view, name = 'impressum'),
-    path('datenschutz', datenschutz_page_view, name = 'datenschutz'),
+    path('kontakt/', kontakt_page_view, name = 'kontakt'),
+    path('impressum/', impressum_page_view, name = 'impressum'),
+    path('datenschutz/', datenschutz_page_view, name = 'datenschutz'),
     #path('attractions/<int:pk>/', attraction_detail, name='attraction_detail'),
     path('attractions/<slug:slug>/', attraction_detail, name='attraction_detail'),
 

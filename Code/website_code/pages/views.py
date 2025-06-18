@@ -19,10 +19,10 @@ from django.core.mail       import send_mail, BadHeaderError                    
 from django.http            import HttpResponse                                 
 
 BLOG_POST_PER_PAGE = 10
-attractionS_PER_PAGE = 6
+attractionS_PER_PAGE = 3
 
 def home_screen_view(request):
-   
+    print("DEBUG") 
     Attractions = list(Attraction.objects.values())                             # Retrieve all attractions values to use adresses for homepage map
     #print(Attractions)
     #return render(request, "pages/home.html", {'attractions': attractions})

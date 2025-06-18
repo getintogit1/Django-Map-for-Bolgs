@@ -1,7 +1,6 @@
 {% extends "base.html" %}
 {% block content %}
 {% load static %}
-
 <style>
     .btn-lg {
         padding: 15px 30px; /* Increase padding for larger buttons */
@@ -101,6 +100,7 @@
                 currentIndex = (currentIndex + 1) % images.length;
                 var slideshowElement = document.getElementById('slideshow');
                 slideshowElement.style.backgroundImage = 'url(' + images[currentIndex] + ')';
+                console.log(images);
             }
 
             setInterval(changeBackground, 5000); // Change background every 5 seconds
