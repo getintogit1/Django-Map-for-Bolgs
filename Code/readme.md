@@ -31,13 +31,15 @@ git clone "https://git.sbg.ac.at/s1086122/webproject_ss_24.git"
 \path\to\your\dir> **python manage.py runserver**<br>
 
 
-6. Access the website in your browser at `http://127.0.0.1:8000/`.#
+6. Access the website in your browser at `http://127.0.0.1:8000/`.
 
-7. Access Django-Admin in your browser at `http://127.0.0.1:8000/admin/`
+7.--> You wont see any Images at First, you need to visit admin site in step 8 and upload Description for in this case Attraction images etc. 
 
-8. To use static files change your settings.py file accordingly and make sure you pointing to the right static dir
+8. Access Django-Admin in your browser at `http://127.0.0.1:8000/admin/`
 
-9. After you made your Static settings run : 
+9. To use static files change your settings.py file accordingly and make sure you pointing to the right static dir
+
+10. After you made your Static settings run : 
 \path\to\your\dir> **py manage.py collectstatic**<br>
 
 
