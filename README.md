@@ -7,11 +7,8 @@ A web application for exploring and sharing sights & attractions on an interacti
 ## 🛠️ Tech Stack
 <p align="center">
   <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" width="50" height="50" alt="HTML5"/>
-
   <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" width="50" height="50" alt="CSS3"/>
-
   <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" width="50" height="50" alt="JavaScript"/>
-
   <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" width="50" height="50" alt="Python"/>
   <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/sqlite/sqlite-original.svg" width="50" height="50" alt="SQLite" />
   <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/django/django-plain.svg" width="50" height="50" alt="Django"/>
@@ -89,19 +86,10 @@ A web application for exploring and sharing sights & attractions on an interacti
 
 5. Visit: [http://127.0.0.1:8000](http://127.0.0.1:8000)
 
-## 🤝 Contributing
-
-Pull requests are welcome!  
-
-## 📄 License
-
-[GNU](LICENSE)
-
 ---
 
 
 ## Project status
-
 
 Progress: [█████████████████]100%
 
