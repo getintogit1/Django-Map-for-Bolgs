@@ -1,9 +1,9 @@
 
 
 
-# Django Map for Bolgs/Attractions🌍🗺️
+# Django Map for Blogs/Attractions🌍🗺️
 
-A web application for exploring and sharing sights & attractions on an interactive map — powered by Django, Leaflet, and modern web technologies.
+This website can serve as a template to connect different geographical points with information and blog posts. I have chosen to illustrate attractions that can be found by their geographic location and the blog function allows you to share information with other users. In the same way it is possible to choose restaurants and list all restaurants in a city and let users blog about them or bookstores or whatever. Have fun with it. There are still many possible improvements such as comment functions or dynamic rendering of geographic etc. — powered by Django, Leaflet, and modern web technologies.
 ## 🛠️ Tech Stack
 <p align="center">
   <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" width="50" height="50" alt="HTML5"/>
