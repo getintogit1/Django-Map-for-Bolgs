@@ -65,7 +65,7 @@ This website can serve as a template to connect different geographical points wi
 
 1. Clone the repository:
     ```bash
-    git clone <repo-url>
+    git clone https://github.com/getintogit1/Django-Map-for-Bolgs
     cd project-folder
     ```
 
